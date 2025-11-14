@@ -1,0 +1,33 @@
+const mongoose= require("mongoose")
+const bcrypt= require ('bcryptjs')
+
+const groupSchema = new mongoose.Schema({
+    name:{
+        type:String,
+        required:true,
+        trim:true,
+
+    },
+    description:{
+        type:String,
+        required:true,
+    },
+    admin:{
+        type:mongoose.Schema.Types.ObjectId, // Reference to User model
+        ref:"User",
+    },
+    members:[{
+        type:mongoose.Schema.Types.ObjectId, // Reference to User model
+        ref:"User",
+    }],
+
+}, 
+{
+    timestamps: true,
+});
+
+
+
+const Group= mongoose.model("Group", groupSchema);
+module.exports= Group;
+
